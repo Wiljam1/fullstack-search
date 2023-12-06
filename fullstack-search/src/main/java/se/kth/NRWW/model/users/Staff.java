@@ -1,37 +1,29 @@
-package se.kth.NRWW.model;
+package se.kth.NRWW.model.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.agroal.DataSource;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
-import org.hibernate.search.engine.backend.types.Sortable;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 
 @Entity
-@Table(name = "staff")
 @Indexed
+@Table(name = "staff")
 public class Staff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @FullTextField(analyzer = "english")
     private String specialty;
 
-    //@FullTextField(analyzer = "name")
-    //@KeywordField(name = "isDoctor_sort", sortable = Sortable.YES, normalizer = "sort")
     private boolean isDoctor;
 
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnore
     private User user;
-    /*
-    @OneToMany(mappedBy = "performer")
-    @JsonManagedReference(value = "doctor-observations")
-    private Set<Observation> observations;
-    */
+
     public boolean isDoctor() {
         return isDoctor;
     }
@@ -63,14 +55,5 @@ public class Staff {
     public void setUser(User user) {
         this.user = user;
     }
-    /*
-    public Set<Observation> getObservations() {
-        return observations;
-    }
 
-    public void setObservations(Set<Observation> observations) {
-        this.observations = observations;
-    }
-
-     */
 }

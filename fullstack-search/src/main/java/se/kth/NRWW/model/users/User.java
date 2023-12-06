@@ -1,4 +1,4 @@
-package se.kth.NRWW.model;
+package se.kth.NRWW.model.users;
 
 import jakarta.persistence.*;
 import org.hibernate.search.engine.backend.types.Sortable;
@@ -8,8 +8,8 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmb
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 
 @Entity
-@Table(name = "user")
 @Indexed
+@Table(name = "user")
 public class User {
 
     @Id
@@ -29,30 +29,18 @@ public class User {
 
     private String password;
 
-    @FullTextField(analyzer = "name")
-    @KeywordField(name = "userType_sort", sortable = Sortable.YES, normalizer = "sort")
     private UserType type;
 
     @JoinColumn(name = "staff_id", referencedColumnName = "id")
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL)
     @IndexedEmbedded
     private Staff staffProfile;
 
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
     @IndexedEmbedded
     private Patient patientProfile;
-
-    /*
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "sent-messages")
-    private List<Message> sentMessages;
-
-    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "received-messages")
-    private List<Message> receivedMessages;
-    */
 
     public UserType getType() {
         return type;
@@ -112,25 +100,12 @@ public class User {
         this.patientProfile = patientProfile;
     }
 
+    public Long getPatientId() {
+        return patientProfile != null ? patientProfile.getId() : null;
+    }
+
     public String getPassword() {return password;}
 
     public void setPassword(String password) {this.password = password;}
 
-    /*
-    public List<Message> getSentMessages() {
-        return sentMessages;
-    }
-
-    public List<Message> getReceivedMessages() {
-        return receivedMessages;
-    }
-
-    public void setSentMessages(List<Message> sentMessages) {
-        this.sentMessages = sentMessages;
-    }
-
-    public void setReceivedMessages(List<Message> receivedMessages) {
-        this.receivedMessages = receivedMessages;
-    }
-     */
 }
