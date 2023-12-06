@@ -3,21 +3,23 @@ package se.kth.NRWW;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
 
 import org.hibernate.search.mapper.orm.session.SearchSession;
-import org.jboss.resteasy.reactive.RestForm;
 import org.jboss.resteasy.reactive.RestQuery;
 
 import io.quarkus.runtime.StartupEvent;
 import se.kth.NRWW.model.User;
 
 @Path("/")
-public class LibraryResource {
+@ApplicationScoped
+@Produces("application/json")
+@Consumes("application/json")
+public class SearchResource {
 
     @Inject
     SearchSession searchSession;
