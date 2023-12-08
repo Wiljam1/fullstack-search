@@ -18,7 +18,6 @@ public class Encounter {
 
     private Long patientId;
 
-    // TODO: Ska kunna sökas efter
     private Date date;
     private String location;
 
@@ -60,5 +59,16 @@ public class Encounter {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "Encounter{" +
+                "id=" + id +
+                ", practitionerId=" + practitionerId +
+                ", patientId=" + patientId +
+                ", date=" + date +
+                ", location='" + location + '\'' +
+                '}';
     }
 }

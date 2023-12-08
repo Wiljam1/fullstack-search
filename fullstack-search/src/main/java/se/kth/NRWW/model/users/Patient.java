@@ -6,7 +6,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Indexed

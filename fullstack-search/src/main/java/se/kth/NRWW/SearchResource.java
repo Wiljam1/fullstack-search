@@ -14,13 +14,20 @@ import jakarta.ws.rs.Produces;
 import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.jboss.resteasy.reactive.RestQuery;
 import se.kth.NRWW.model.patientjournal.Condition;
+import se.kth.NRWW.model.patientjournal.Encounter;
 import se.kth.NRWW.model.users.User;
 import se.kth.NRWW.repositories.ConditionRepository;
+import se.kth.NRWW.repositories.EncounterRepository;
+import se.kth.NRWW.repositories.ObservationRepository;
 import se.kth.NRWW.repositories.UserRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 
 @Path("/")
@@ -34,6 +41,12 @@ public class SearchResource {
 
     @Inject
     ConditionRepository conditionRepository;
+
+    @Inject
+    EncounterRepository encounterRepository;
+
+    @Inject
+    ObservationRepository observationRepository;
 
     @Inject
     UserRepository userRepository;
@@ -107,7 +120,6 @@ public class SearchResource {
                 });
     }
 
-
     @GET
     @Path("conditions/searchReactive")
     @Transactional
@@ -120,6 +132,49 @@ public class SearchResource {
                                 .fields("name").matching(pattern))
                         .fetchHits(size.orElse(20))
         );
+    }
+
+    @GET
+    @Path("searchDoctorPatients")
+    @Transactional
+    public Uni<Set<User>> searchDoctorPatients(@RestQuery Long doctorId) {
+        Set<Long> userIds = new HashSet<>();
+
+        // TODO: Fix so this is non-blocking (Return Uni everywhere)
+        userIds.addAll(conditionRepository.findPatientIdsByDoctorId(doctorId));
+        userIds.addAll(observationRepository.findPatientIdsByPerformerId(doctorId));
+        userIds.addAll(encounterRepository.findPatientIdsByPractitionerId(doctorId));
+
+        Set<User> userResults = new HashSet<>();
+        for(Long id : userIds) {
+            userResults.add(userRepository.findByPatientId(id));
+        }
+
+        return Uni.createFrom().item(() ->
+                userResults
+        );
+    }
+
+    @GET
+    @Path("searchDoctorEncounters")
+    @Transactional
+    public Uni<Set<Encounter>> searchDoctorEncounters(@RestQuery Long doctorId, @RestQuery String date) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            Date realDate = sdf.parse(date);
+
+            System.out.println("Date sent to repository: " + realDate);
+
+            return Uni.createFrom().item(() ->
+                            encounterRepository.findByPractitionerIdAndDate(doctorId, realDate)
+                    //new ArrayList<>(encounterRepository.findByDate(realDate))
+            );
+        } catch (ParseException e) {
+            // Handle the parse exception, log it, and return an appropriate response
+            throw new RuntimeException("Error parsing date parameter", e);
+        }
     }
 
 //    // Non-reactive search?
