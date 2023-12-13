@@ -1,12 +1,12 @@
 package se.kth.NRWW.repositories;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
+import io.quarkus.panache.common.Page;
+import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import org.hibernate.search.mapper.orm.Search;
-import org.hibernate.search.mapper.orm.session.SearchSession;
 import se.kth.NRWW.model.patientjournal.Condition;
 import se.kth.NRWW.model.patientjournal.Encounter;
 
@@ -23,6 +23,13 @@ public class ConditionRepository implements PanacheRepositoryBase<Condition, Lon
                 .stream()
                 .map(Condition::getPatientId)
                 .collect(Collectors.toList());
+    }
+
+    public List<Condition> searchConditions(String pattern, Optional<Integer> size) {
+        return find("name like concat('%', :pattern, '%')",
+                Parameters.with("pattern", pattern))
+                .page(Page.ofSize(size.orElse(20)))
+                .list();
     }
 
 }

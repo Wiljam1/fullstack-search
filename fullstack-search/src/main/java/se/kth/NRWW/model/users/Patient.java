@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.agroal.DataSource;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 import java.sql.Date;
 
 @Entity
-@Indexed
+//Indexed
 @Table(name = "patient")
 public class Patient {
 

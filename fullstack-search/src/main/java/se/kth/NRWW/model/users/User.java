@@ -1,16 +1,16 @@
 package se.kth.NRWW.model.users;
 
 import jakarta.persistence.*;
-import org.hibernate.search.engine.backend.types.Sortable;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
+//import org.hibernate.search.engine.backend.types.Sortable;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
+//import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 
 import java.util.Iterator;
 
 @Entity
-@Indexed
+//@Indexed
 @Table(name = "user")
 public class User {
 
@@ -18,15 +18,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @FullTextField(analyzer = "name")
-    @KeywordField(name = "username_sort", sortable = Sortable.YES, normalizer = "sort")
+//    @FullTextField(analyzer = "name")
+//    @KeywordField(name = "username_sort", sortable = Sortable.YES, normalizer = "sort")
     private String username;
 
-    @FullTextField(analyzer = "english")
+//    @FullTextField(analyzer = "english")
     private String name;
 
-    @FullTextField(analyzer = "name")
-    @KeywordField(name = "email_sort", sortable = Sortable.YES, normalizer = "sort")
+//    @FullTextField(analyzer = "name")
+//    @KeywordField(name = "email_sort", sortable = Sortable.YES, normalizer = "sort")
     private String email;
 
     private String password;
@@ -35,13 +35,13 @@ public class User {
 
     @JoinColumn(name = "staff_id", referencedColumnName = "id")
     @OneToOne(cascade = CascadeType.ALL)
-    @IndexedEmbedded
+//    @IndexedEmbedded
     private Staff staffProfile;
 
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
-    @IndexedEmbedded
+//    @IndexedEmbedded
     private Patient patientProfile;
 
     public UserType getType() {

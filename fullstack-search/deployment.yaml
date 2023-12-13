@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fullstack-search
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fullstack-search
+  template:
+    metadata:
+      labels:
+        app: fullstack-search
+    spec:
+      containers:
+        - name: fullstack-search
+          image: wiljam/fullstack-search:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: QUARKUS_DATASOURCE_JDBC_URL
+              value: jdbc:mysql://mysql-service:3306/patientjournal
+            - name: QUARKUS_DATASOURCE_USERNAME
+              value: root
+            - name: QUARKUS_DATASOURCE_PASSWORD
+              value: wiljamniklas
+
+
