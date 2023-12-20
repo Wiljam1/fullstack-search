@@ -1,12 +1,8 @@
 package se.kth.NRWW.model.patientjournal;
 
-import io.quarkus.agroal.DataSource;
 import jakarta.persistence.*;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 @Entity
-@Indexed
 @Table(name = "observations")
 public class Observation {
     @Id
@@ -17,7 +13,6 @@ public class Observation {
 
     private Long patientId;
 
-    @FullTextField(analyzer = "english")
     private String subject;
     private String basedOn;
 

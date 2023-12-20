@@ -1,13 +1,10 @@
 package se.kth.NRWW.model.patientjournal;
 
-import io.quarkus.agroal.DataSource;
 import jakarta.persistence.*;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 import java.util.Date;
 
 @Entity
-@Indexed
 @Table(name = "encounters")
 public class Encounter {
     @Id
