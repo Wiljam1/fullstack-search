@@ -5,6 +5,6 @@ RUN mvn -f /app/pom.xml install
 
 FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY --from=build /app/target/fullstack-search-0.0.1-SNAPSHOT.jar /app/fullstack-search-0.0.1-SNAPSHOT.jar
+COPY --from=build /app/target/fullstack-search-1.0-SNAPSHOT.jar /app/fullstack-search-1.0-SNAPSHOT.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app/target/fullstack-search-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/target/fullstack-search-1.0-SNAPSHOT.jar"]
