@@ -11,6 +11,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+//import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.jboss.resteasy.reactive.RestQuery;
 import se.kth.NRWW.model.patientjournal.Condition;
 import se.kth.NRWW.model.patientjournal.Encounter;
@@ -22,6 +23,9 @@ import se.kth.NRWW.repositories.UserRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -31,6 +35,9 @@ import java.util.*;
 @Produces("application/json")
 @Consumes("application/json")
 public class SearchResource {
+
+//    @Inject
+//    SearchSession searchSession;
 
     @Inject
     ConditionRepository conditionRepository;
@@ -43,6 +50,21 @@ public class SearchResource {
 
     @Inject
     UserRepository userRepository;
+
+    @Transactional
+    void onStart(@Observes StartupEvent ev) throws InterruptedException {
+//        searchSession.massIndexer()
+//                .startAndWait();
+    }
+
+    // Endpoint to trigger reindexing
+    @GET
+    @Path("index")
+    @Transactional
+    public String reindex() throws InterruptedException {
+        //searchSession.massIndexer().startAndWait();
+        return "Indexed searches..";
+    }
 
     // Reactive search
     // Use all the Uni searches and provide collected results
@@ -65,12 +87,13 @@ public class SearchResource {
     public Uni<List<User>> searchUsers(@RestQuery String pattern,
                                        @RestQuery Optional<Integer> size) {
         return Uni.createFrom().item(() ->
-                searchSession.search(User.class)
-                        .where(f -> pattern == null || pattern.trim().isEmpty() ? f.matchAll()
-                                : f.simpleQueryString()
-                                .fields("username", "name", "email").matching(pattern))
-                        .sort(f -> f.field("username_sort"))//.then().field("firstName_sort"))
-                        .fetchHits(size.orElse(20))
+//                searchSession.search(User.class)
+//                        .where(f -> pattern == null || pattern.trim().isEmpty() ? f.matchAll()
+//                                : f.simpleQueryString()
+//                                .fields("username", "name", "email").matching(pattern))
+//                        .sort(f -> f.field("username_sort"))//.then().field("firstName_sort"))
+//                        .fetchHits(size.orElse(20))
+                userRepository.searchUsers(pattern, size)
         );
     }
 
@@ -101,11 +124,12 @@ public class SearchResource {
     public Uni<List<Condition>> searchConditionsReactive(@RestQuery String pattern,
                                                  @RestQuery Optional<Integer> size) {
         return Uni.createFrom().item(() ->
-                searchSession.search(Condition.class)
-                        .where(f -> pattern == null || pattern.trim().isEmpty() ? f.matchAll()
-                                : f.simpleQueryString()
-                                .fields("name").matching(pattern))
-                        .fetchHits(size.orElse(20))
+//                searchSession.search(Condition.class)
+//                        .where(f -> pattern == null || pattern.trim().isEmpty() ? f.matchAll()
+//                                : f.simpleQueryString()
+//                                .fields("name").matching(pattern))
+//                        .fetchHits(size.orElse(20))
+                conditionRepository.searchConditions(pattern, size)
         );
     }
 
