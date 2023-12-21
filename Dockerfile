@@ -5,6 +5,6 @@ RUN mvn -f app/pom.xml install
 
 FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
-COPY --from=build /app/target/quarkus/ /app/fullstack-search/
+COPY --from=build /app/target/quarkus-app/ /app/quarkus-app/
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app/fullstack-search-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/quarkus-app/quarkus-run.jar"]
