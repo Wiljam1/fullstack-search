@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7263a336-3e2f-41ef-bff2-7a7772a94ef4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-    </list>
+    <list default="true" id="7263a336-3e2f-41ef-bff2-7a7772a94ef4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,7 +138,7 @@
       <workItem from="1703077537534" duration="2162000" />
       <workItem from="1703156437761" duration="5239000" />
       <workItem from="1703242293298" duration="4423000" />
-      <workItem from="1703247169362" duration="3462000" />
+      <workItem from="1703247169362" duration="3838000" />
     </task>
     <servers />
   </component>
