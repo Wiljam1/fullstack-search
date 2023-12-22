@@ -1,10 +1,12 @@
-FROM maven:3.8.1-openjdk-17-slim AS build
+FROM eclipse-temurin:17-jdk-jammy AS build
 
 WORKDIR /app
-
 COPY . /app
 
-RUN mvn install
+# Ensure the Maven Wrapper is executable
+RUN chmod +x mvnw
+
+RUN ./mvnw install
 
 FROM eclipse-temurin:17-jdk-jammy
 
