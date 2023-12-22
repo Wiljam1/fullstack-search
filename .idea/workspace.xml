@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7263a336-3e2f-41ef-bff2-7a7772a94ef4" name="Changes" comment="" />
+    <list default="true" id="7263a336-3e2f-41ef-bff2-7a7772a94ef4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,7 +40,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../../../apache-maven-3.9.6/bin" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -87,7 +89,22 @@
       <command value="mvn deploy" />
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.SearchResourceTest">
+    <configuration name="SearchResourceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fullstack-search" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="se.kth.NRWW.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="se.kth.NRWW" />
+      <option name="MAIN_CLASS_NAME" value="se.kth.NRWW.SearchResourceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="fullstack-search" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
       <module name="fullstack-search" />
       <QsMavenRunConfiguration>
@@ -124,6 +141,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.SearchResourceTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -138,7 +160,7 @@
       <workItem from="1703077537534" duration="2162000" />
       <workItem from="1703156437761" duration="5239000" />
       <workItem from="1703242293298" duration="4423000" />
-      <workItem from="1703247169362" duration="5390000" />
+      <workItem from="1703247169362" duration="6237000" />
     </task>
     <servers />
   </component>
