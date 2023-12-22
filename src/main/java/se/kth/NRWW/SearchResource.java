@@ -1,17 +1,14 @@
 package se.kth.NRWW;
 
-import io.quarkus.runtime.StartupEvent;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-//import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.jboss.resteasy.reactive.RestQuery;
 import se.kth.NRWW.model.patientjournal.Condition;
 import se.kth.NRWW.model.patientjournal.Encounter;
@@ -23,10 +20,6 @@ import se.kth.NRWW.repositories.UserRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -130,7 +123,6 @@ public class SearchResource {
     @Transactional
     public Uni<Set<Encounter>> searchDoctorEncounters(@RestQuery Long doctorId, @RestQuery String date) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
             Date realDate = sdf.parse(date);
@@ -146,63 +138,4 @@ public class SearchResource {
             throw new RuntimeException("Error parsing date parameter", e);
         }
     }
-
-//    // Non-reactive search?
-//    @GET
-//    @Path("searchPatients")
-//    @Transactional
-//    public Set<User> search(@RestQuery String pattern,
-//                            @RestQuery Optional<Integer> size) {
-//        Set<User> users = new HashSet<>();
-//        users.addAll(searchPatientsWithCondition(pattern, size));
-//        users.addAll(searchUsers(pattern, size));
-//        return users;
-//    }
-
-//    @GET
-//    @Path("users/search")
-//    @Transactional
-//    public List<User> searchUsers(@RestQuery String pattern,
-//                                  @RestQuery Optional<Integer> size) {
-//
-//        return searchSession.search(User.class)
-//                .where(f -> pattern == null || pattern.trim().isEmpty() ? f.matchAll()
-//                        : f.simpleQueryString()
-//                        .fields("username", "name", "email").matching(pattern))
-//                .sort(f -> f.field("username_sort"))//.then().field("firstName_sort"))
-//                .fetchHits(size.orElse(20));
-//    }
-
-//    @GET
-//    @Path("users/searchWithCondition")
-//    @Transactional
-//    public List<User> searchPatientsWithCondition(@RestQuery String pattern,
-//                                                  @RestQuery Optional<Integer> size) {
-//        List<Condition> conditions = searchConditions(pattern, size);
-//
-//        List<Long> patientIds = conditions.stream()
-//                .map(Condition::getPatientId)
-//                .toList();
-//
-//        List<User> usersToReturn = new ArrayList<>();
-//        for (Long patientId : patientIds) {
-//            User user = userRepository.findByPatientId(patientId);
-//            usersToReturn.add(user);
-//        }
-//
-//        return usersToReturn;
-//    }
-
-//    @GET
-//    @Path("conditions/search")
-//    @Transactional
-//    public List<Condition> searchConditions(@RestQuery String pattern,
-//                                            @RestQuery Optional<Integer> size) {
-//        System.out.println("Searching for conditions...");
-//        return searchSession.search(Condition.class)
-//                .where(f -> pattern == null || pattern.trim().isEmpty() ? f.matchAll()
-//                        : f.simpleQueryString()
-//                        .fields("name").matching(pattern))
-//                .fetchHits(size.orElse(20));
-//    }
 }
