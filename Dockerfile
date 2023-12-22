@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN ./mvnw install
+RUN mvn install
 
 FROM eclipse-temurin:17-jdk-jammy
 
