@@ -131,10 +131,8 @@ public class SearchResource {
 
             return Uni.createFrom().item(() ->
                             encounterRepository.findByPractitionerIdAndDate(doctorId, realDate)
-                    //new ArrayList<>(encounterRepository.findByDate(realDate))
             );
         } catch (ParseException e) {
-            // Handle the parse exception, log it, and return an appropriate response
             throw new RuntimeException("Error parsing date parameter", e);
         }
     }
