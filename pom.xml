@@ -129,7 +129,6 @@
         <configuration>
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <maven.home>C:\apache-maven-3.9.6\bin</maven.home>
           </systemPropertyVariables>
         </configuration>
       </plugin>
@@ -148,7 +147,6 @@
           <systemPropertyVariables>
             <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <maven.home>C:\apache-maven-3.9.6\bin</maven.home>
           </systemPropertyVariables>
         </configuration>
       </plugin>
