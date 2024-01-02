@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7263a336-3e2f-41ef-bff2-7a7772a94ef4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/kth/NRWW/SearchResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/se/kth/NRWW/SearchResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +92,7 @@
       <command value="mvn deploy" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.SearchResourceTest">
+  <component name="RunManager" selected="Quarkus.fullstack-search">
     <configuration name="SearchResourceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="fullstack-search" />
       <extension name="coverage">
@@ -162,7 +164,10 @@
       <workItem from="1703156437761" duration="5239000" />
       <workItem from="1703242293298" duration="4423000" />
       <workItem from="1703247169362" duration="6560000" />
-      <workItem from="1703254036619" duration="1129000" />
+      <workItem from="1703254036619" duration="1989000" />
+      <workItem from="1703257128083" duration="523000" />
+      <workItem from="1704029431377" duration="186000" />
+      <workItem from="1704206210997" duration="2033000" />
     </task>
     <servers />
   </component>

@@ -2,6 +2,7 @@ package se.kth.NRWW;
 
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -45,6 +46,7 @@ public class SearchResource {
     // Use all the Uni searches and provide collected results
     @GET
     @Path("searchPatients")
+    @RolesAllowed("doctor")
     @Transactional
     public Multi<User> search(@RestQuery String pattern,
                               @RestQuery Optional<Integer> size) {
@@ -58,6 +60,7 @@ public class SearchResource {
 
     @GET
     @Path("users/search")
+    @RolesAllowed("doctor")
     @Transactional
     public Uni<List<User>> searchUsers(@RestQuery String pattern,
                                        @RestQuery Optional<Integer> size) {
@@ -68,6 +71,7 @@ public class SearchResource {
 
     @GET
     @Path("users/searchWithCondition")
+    @RolesAllowed("doctor")
     @Transactional
     public Uni<List<User>> searchPatientsWithCondition(@RestQuery String pattern,
                                                        @RestQuery Optional<Integer> size) {
@@ -89,6 +93,7 @@ public class SearchResource {
 
     @GET
     @Path("conditions/searchReactive")
+    @RolesAllowed("doctor")
     @Transactional
     public Uni<List<Condition>> searchConditionsReactive(@RestQuery String pattern,
                                                  @RestQuery Optional<Integer> size) {
@@ -99,6 +104,7 @@ public class SearchResource {
 
     @GET
     @Path("searchDoctorPatients")
+    @RolesAllowed("doctor")
     @Transactional
     public Uni<Set<User>> searchDoctorPatients(@RestQuery Long doctorId) {
         Set<Long> userIds = new HashSet<>();
@@ -120,6 +126,7 @@ public class SearchResource {
 
     @GET
     @Path("searchDoctorEncounters")
+    @RolesAllowed("doctor")
     @Transactional
     public Uni<Set<Encounter>> searchDoctorEncounters(@RestQuery Long doctorId, @RestQuery String date) {
         try {
